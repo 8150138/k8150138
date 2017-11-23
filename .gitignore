@@ -1,0 +1,14 @@
+/.git/
+/.idea/
+/bitrix/*
+!/bitrix/php_interface/
+!/bitrix/.settings.php
+/images/
+/upload/
+*.tar
+*.tar.gz
+*.tmp
+*.bak
+*.log
+*log*.txt
+.lock
