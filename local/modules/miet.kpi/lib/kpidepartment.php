@@ -86,7 +86,6 @@ class KPIManager {
         $db = Application::getConnection();
         //Начинаем транзакцию
         $db->startTransaction();
-
         foreach($arKPIValues as $KPI => $KPIValue) {
             $arValue = array(
  'UF_VALUE' => $KPIValue,
