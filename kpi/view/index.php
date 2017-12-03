@@ -4,13 +4,5 @@ $APPLICATION->SetTitle("Title");
 ?><?$APPLICATION->IncludeComponent(
 	"miet:kpi.employee.view",
 	"",
-	Array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "3600",
-		"CACHE_TYPE" => "A",
-		"SET_STATUS_404" => "N",
-		"USER_ID" => $_REQUEST["USER_ID"]
-	)
+Array()
 );?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

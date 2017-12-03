@@ -1,9 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("KPI");
-?><?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Title");
 ?><?$APPLICATION->IncludeComponent(
 	"miet:kpi.employee.detail",
 	"",
@@ -16,4 +13,4 @@ $APPLICATION->SetTitle("Title");
 		"SET_STATUS_404" => "N",
 		"USER_ID" => $_REQUEST["USER_ID"]
 	)
-);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

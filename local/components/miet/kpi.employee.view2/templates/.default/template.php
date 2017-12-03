@@ -11,20 +11,20 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 <?endif;?>
 
 <?php
-// подключаем пространство имен класса HighloadBlockTable и даём ему псевдоним Highloadblock для удобной работы
-use Bitrix\Highloadblock\HighloadBlockTable as Highloadblock;
+// подключаем пространство имен класса HighloadBlockTable и даём ему псевдоним HLBT для удобной работы
+use Bitrix\Highloadblock\HighloadBlockTable as HLBT;
 // id highload-инфоблока
-const MY_HL_BLOCK_ID = 11;
-//подключение модуля highloadblock
+const MY_HL_BLOCK_ID = 2;
+//подключаем модуль highloadblock
 CModule::IncludeModule('highloadblock');
-//Функция получения экземпляра класса:
+//Напишем функцию получения экземпляра класса:
 function GetEntityDataClass($HlBlockId) {
     if (empty($HlBlockId) || $HlBlockId < 1)
     {
         return false;
     }
-    $hlblock = Highloadblock::getById($HlBlockId)->fetch();
-    $entity = Highloadblock::compileEntity($hlblock);
+    $hlblock = HLBT::getById($HlBlockId)->fetch();
+    $entity = HLBT::compileEntity($hlblock);
     $entity_data_class = $entity->getDataClass();
     return $entity_data_class;
 }
@@ -56,7 +56,7 @@ $arItem['SELECTED'] = $arr[5];
 ?>
 
 <form action="<?=GET_FORM_ACTION_URI?>" method="GET">
-    <select name="UF_PERIOD" id='select' onchange="window.location.replace('/kpi/view2/index.php?date='+ document.getElementById('select').options[document.getElementById('select').selectedIndex].text);">
+    <select name="UF_PERIOD">
         <?foreach($arResult['PERIOD_ITEMS'] as $arItem):?>
             <option <? if($arItem['VALUE'] == $date):?>selected<? endif; ?>
                     value="<?=$arItem['VALUE'];?>"><?=$arItem['VALUE'];?></option>
@@ -67,7 +67,7 @@ $arItem['SELECTED'] = $arr[5];
         <?foreach($arResult["ITEMS"] as $arItem):?>
             <tr>
                 <td><?=$arItem['NAME'];?></td>
-                <td><input type="text" name="KPI[<?=$arItem['ID']?>]"
+                <td>
                            value="<?=$arr[$i]?>"></td>
                 <? $i++ ?>
             </tr>

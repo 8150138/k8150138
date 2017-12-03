@@ -25,7 +25,16 @@ if(strlen($arParams["DATE_FORMAT"]) <= 0) {
     $arParams["DATE_FORMAT"] = $DB->DateFormatToPHP(CSite::GetDateFormat("SHORT"));
 }
 ###
-
+###Сохранение значений KPI###
+if($_REQUEST['saveKPI']) {
+    if(KPI\KPIManager::SetKPIEmployee($arParams["USER_ID"],
+        $_REQUEST['UF_PERIOD'], $_REQUEST['KPI'])) {
+        $arResult['OK'] = 'Изменения успешно сохранены';
+    } else {
+        $arResult['ERROR'] = 'Ошибка при сохранении';
+    }
+}
+###
 ###Получение данных из БД###
 if($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"] === "N"
     ? false: $USER->GetGroups()), $bUSER_HAVE_ACCESS))) {
@@ -43,16 +52,8 @@ if($this->StartResultCache(false, array(($arParams["CACHE_GROUPS"] === "N"
  }
     ###
     ###Получение списка показателей KPI для сотрудника###
-
-
-
-    foreach($arResult['ITEMS'] as &$arKPI) {
-        $arValue = KPI\KPIManager::GetKPIEmployeeValue($arKPI["ID"], $arParams["USER_ID"], $_REQUEST['UF_PERIOD']);
-        $arKPI["KPI_ID"] = $arValue["ID"];
-        $arKPI["KPI_VALUE"] = $arValue["UF_VALUE"];
-    }
-    $arResult['ITEMS'] = KPI\KPIManager::GetKPIEmployee($arParams["USER_ID"]);
-
+    $arResult['ITEMS'] =
+        KPI\KPIManager::GetKPIEmployee($arParams["USER_ID"]);
     ###Кэширование значения элементов массива $arResult###
     $this->SetResultCacheKeys(array(
         "ITEMS",
